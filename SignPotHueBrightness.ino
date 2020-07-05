@@ -5,9 +5,9 @@ float hue = 0;
 int potLightLevelLast = -10;
 int potHoueLast = -10;
 
-int pinRed = 9;
-int pinGreen = 5;
-int pinBlue = 3;
+int pinRed = 5;
+int pinGreen = 6;
+int pinBlue = 9;
 
 void setup() {
 	Serial.begin(115200);
