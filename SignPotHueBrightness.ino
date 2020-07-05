@@ -18,20 +18,26 @@ void setup() {
 }
 
 void checkLightLevelPot() {
-	int potLightLevel = analogRead(A5);
-	potLightLevel = map(potLightLevel, 0, 1023, 0, 255);
-	//To avaoid flicker, only change level if +/-4 steps
-	if ((potLightLevelLast-potLightLevel > 4) || (potLightLevelLast-potLightLevel < -4)) {
+	int potLightLevel = analogRead(A1);
+	// Scale inverted pot 0-3.7V (0-780)
+	potLightLevel = map(potLightLevel, 780, 0, 0, 255);
+	// Avoid negative nambers due to voltage differences when scaling
+	potLightLevel = max(potLightLevel, 0);
+	// To avaoid flicker, only change level if steps exceeds a value
+	if ((potLightLevelLast-potLightLevel > 3) || (potLightLevelLast-potLightLevel < -3)) {
 		Serial.print("Light level changed to ");
 		Serial.println(potLightLevel);
 		level = potLightLevel/255.0f;
 		potLightLevelLast = potLightLevel;
 	}
 
-	int potHue = analogRead(A6);
-	potHue = map(potHue, 0, 1023, 0, 255);
-	//To avaoid flicker, only change hue if +/-4 steps
-	if ((potHoueLast-potHue > 4) || (potHoueLast-potHue < -4)) {
+	int potHue = analogRead(A2);
+	// Scale inverted pot 0-3.7V (0-780)
+	potHue = map(potHue, 780, 0, 0, 255);
+	// Avoid negative nambers due to voltage differences when scaling
+	potHue = max(potHue, 0);
+	// To avaoid flicker, only change level if steps exceeds a value
+	if ((potHoueLast-potHue > 3) || (potHoueLast-potHue < -3)) {
 		Serial.print("Hue changed to ");
 		Serial.println(potHue);
 		hue = potHue/255.0f;
